@@ -303,7 +303,7 @@ function RecruiterDashboard() {
                   application
                     .applicant
                     ?.profilePicture ||
-                  "https://via.placeholder.com/50"
+                  "https://placehold.net/avatar-5.svg"
                 }
                 alt=""
                 className="h-12 w-12 rounded-full object-cover"

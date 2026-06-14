@@ -13,197 +13,333 @@ function ApplicantsPage() {
   const [applications, setApplications] =
     useState([]);
 
-  const fetchApplicants =
-    async () => {
-      try {
-        const data =
-          await getJobApplicants(
-            jobId
-          );
+  const fetchApplicants = async () => {
+    try {
+      const data =
+        await getJobApplicants(jobId);
 
-        setApplications(
-          data.applications
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      setApplications(
+        data.applications
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     fetchApplicants();
   }, []);
 
-  const handleStatusChange =
-    async (
-      applicationId,
-      status
-    ) => {
-      try {
-        await updateApplicationStatus(
-          applicationId,
-          status
-        );
+  const handleStatusChange = async (
+    applicationId,
+    status
+  ) => {
+    try {
+      await updateApplicationStatus(
+        applicationId,
+        status
+      );
 
-        fetchApplicants();
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      fetchApplicants();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <DashboardLayout>
-      <div className="min-h-screen bg-slate-950 p-8">
+      <div className="bg-slate-950 p-4 md:p-8">
 
-        <h1 className="mb-8 text-4xl font-bold text-white">
+        <h1 className="mb-8 text-3xl md:text-4xl font-bold text-white">
           Applicants
         </h1>
 
-        <div className="overflow-x-auto rounded-3xl border border-slate-800 bg-slate-900">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-225">
+        {/* MOBILE VIEW */}
 
-              <thead>
+        <div className="space-y-4 md:hidden">
 
-                <tr className="border-b border-slate-800">
+          {applications.map(
+            (application) => (
+              <div
+                key={application._id}
+                className="rounded-2xl border border-slate-800 bg-slate-900 p-4"
+              >
 
-                  <th className="p-4 text-left text-slate-300">
-                    Candidate
-                  </th>
+                <div className="flex items-center gap-3">
 
-                  <th className="p-4 text-left text-slate-300">
-                    Information
-                  </th>
+                  <img
+                    src={
+                      application.applicant
+                        ?.profilePicture ||
+                      "https://placehold.net/avatar-5.svg"
+                    }
+                    alt=""
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
 
-                  <th className="p-4 text-left text-slate-300">
-                    Resume
-                  </th>
+                  <div className="min-w-0">
 
-                  <th className="p-4 text-left text-slate-300">
-                    Status
-                  </th>
-
-                  <th className="p-4 text-left text-slate-300">
-                    Actions
-                  </th>
-
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                {applications.map(
-                  (application) => (
-                    <tr
-                      key={
-                        application._id
+                    <h3 className="truncate font-semibold text-white">
+                      {
+                        application
+                          .applicant
+                          ?.fullName
                       }
-                      className="border-b border-slate-800"
+                    </h3>
+
+                    <p className="truncate text-sm text-slate-400">
+                      {
+                        application
+                          .applicant
+                          ?.email
+                      }
+                    </p>
+
+                  </div>
+
+                </div>
+
+                <div className="mt-4">
+
+                  <p className="text-sm text-slate-400">
+                    Status
+                  </p>
+
+                  <p className="capitalize text-white">
+                    {application.status}
+                  </p>
+
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+
+                  {application.applicant
+                    ?.resumeUrl ? (
+                    <a
+                      href={
+                        application
+                          .applicant
+                          .resumeUrl
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-lg bg-blue-600 px-3 py-2 text-sm text-white"
                     >
+                      Resume
+                    </a>
+                  ) : (
+                    <span className="text-sm text-slate-500">
+                      No Resume
+                    </span>
+                  )}
 
-                      <td className="p-4 text-white">
-                        {
-                          application
-                            .applicant
-                            ?.fullName
+                  <button
+                    onClick={() =>
+                      handleStatusChange(
+                        application._id,
+                        "shortlisted"
+                      )
+                    }
+                    className="rounded-lg bg-green-600 px-3 py-2 text-sm text-white"
+                  >
+                    Shortlist
+                  </button>
+
+                  <button
+                    onClick={() =>
+                      handleStatusChange(
+                        application._id,
+                        "rejected"
+                      )
+                    }
+                    className="rounded-lg bg-red-600 px-3 py-2 text-sm text-white"
+                  >
+                    Reject
+                  </button>
+
+                </div>
+
+              </div>
+            )
+          )}
+
+        </div>
+
+        {/* DESKTOP VIEW */}
+
+        <div className="hidden md:block">
+
+          <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
+
+            <div className="overflow-x-auto">
+
+              <table className="w-full">
+
+                <thead>
+
+                  <tr className="border-b border-slate-800">
+
+                    <th className="p-4 text-left text-slate-300">
+                      Candidate
+                    </th>
+
+                    <th className="p-4 text-left text-slate-300">
+                      Information
+                    </th>
+
+                    <th className="p-4 text-left text-slate-300">
+                      Resume
+                    </th>
+
+                    <th className="p-4 text-left text-slate-300">
+                      Status
+                    </th>
+
+                    <th className="p-4 text-left text-slate-300">
+                      Actions
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody>
+
+                  {applications.map(
+                    (application) => (
+                      <tr
+                        key={
+                          application._id
                         }
-                      </td>
+                        className="border-b border-slate-800 hover:bg-slate-800/40"
+                      >
 
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
+                        <td className="p-4 text-white">
+                          {
+                            application
+                              .applicant
+                              ?.fullName
+                          }
+                        </td>
 
-                          <img
-                            src={
-                              application.applicant?.profilePicture ||
-                              "https://via.placeholder.com/40"
-                            }
-                            alt=""
-                            className="h-10 w-10 rounded-full object-cover"
-                          />
+                        <td className="p-4">
 
-                          <div>
-                            <p className="text-white">
-                              {application.applicant?.fullName}
-                            </p>
-                            <p className="text-sm text-slate-400">
-                              {application.applicant?.email}
-                            </p>
+                          <div className="flex items-center gap-3">
+
+                            <img
+                              src={
+                                application
+                                  .applicant
+                                  ?.profilePicture ||
+                                "https://placehold.net/avatar.svg"
+                              }
+                              alt=""
+                              className="h-12 w-12 rounded-full object-cover"
+                            />
+
+                            <div>
+
+                              <p className="text-white">
+                                {
+                                  application
+                                    .applicant
+                                    ?.fullName
+                                }
+                              </p>
+
+                              <p className="text-sm text-slate-400">
+                                {
+                                  application
+                                    .applicant
+                                    ?.email
+                                }
+                              </p>
+
+                            </div>
+
                           </div>
 
-                        </div>
-                      </td>
+                        </td>
 
-                      <td className="p-4">
+                        <td className="p-4">
 
-                        {application
-                          .applicant
-                          ?.resumeUrl ? (
-                          <a
-                            href={application.applicant?.resumeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="rounded-lg bg-blue-600 px-3 py-2 text-white hover:bg-blue-700"
-                          >
-                            View Resume
-                          </a>
-                        ) : (
-                          <span className="text-slate-500">
-                            No Resume
+                          {application
+                            .applicant
+                            ?.resumeUrl ? (
+                            <a
+                              href={
+                                application
+                                  .applicant
+                                  .resumeUrl
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="rounded-lg bg-blue-600 px-3 py-2 text-white hover:bg-blue-700"
+                            >
+                              View Resume
+                            </a>
+                          ) : (
+                            <span className="text-slate-500">
+                              No Resume
+                            </span>
+                          )}
+
+                        </td>
+
+                        <td className="p-4">
+
+                          <span className="capitalize text-white">
+                            {
+                              application.status
+                            }
                           </span>
-                        )}
 
-                      </td>
+                        </td>
 
-                      <td className="p-4">
+                        <td className="p-4">
 
-                        <span className="capitalize text-white">
-                          {
-                            application.status
-                          }
-                        </span>
+                          <div className="flex gap-2">
 
-                      </td>
+                            <button
+                              onClick={() =>
+                                handleStatusChange(
+                                  application._id,
+                                  "shortlisted"
+                                )
+                              }
+                              className="rounded-lg bg-green-600 px-3 py-2 text-white"
+                            >
+                              Shortlist
+                            </button>
 
-                      <td className="p-4">
+                            <button
+                              onClick={() =>
+                                handleStatusChange(
+                                  application._id,
+                                  "rejected"
+                                )
+                              }
+                              className="rounded-lg bg-red-600 px-3 py-2 text-white"
+                            >
+                              Reject
+                            </button>
 
-                        <div className="flex gap-2">
+                          </div>
 
-                          <button
-                            onClick={() =>
-                              handleStatusChange(
-                                application._id,
-                                "shortlisted"
-                              )
-                            }
-                            className="rounded-lg bg-green-600 px-3 py-2 text-white"
-                          >
-                            Shortlist
-                          </button>
+                        </td>
 
-                          <button
-                            onClick={() =>
-                              handleStatusChange(
-                                application._id,
-                                "rejected"
-                              )
-                            }
-                            className="rounded-lg bg-red-600 px-3 py-2 text-white"
-                          >
-                            Reject
-                          </button>
+                      </tr>
+                    )
+                  )}
 
-                        </div>
+                </tbody>
 
-                      </td>
+              </table>
 
-                    </tr>
-                  )
-                )}
+            </div>
 
-              </tbody>
-
-            </table>
           </div>
+
         </div>
 
       </div>

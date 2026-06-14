@@ -50,7 +50,7 @@ function ApplicationsPage() {
                                         <img
                                             src={
                                                 application.applicant?.profilePicture ||
-                                                "https://via.placeholder.com/40"
+                                                "https://placehold.net/avatar-5.svg"
                                             }
                                             alt=""
                                             className="h-10 w-10 rounded-full object-cover"
