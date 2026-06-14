@@ -39,7 +39,7 @@ function JobsPage() {
       if (!confirmDelete) return;
 
       try {
-
+        
         await deleteJob(jobId);
 
         setJobs(

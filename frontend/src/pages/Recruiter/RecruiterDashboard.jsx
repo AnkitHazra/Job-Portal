@@ -112,7 +112,7 @@ function RecruiterDashboard() {
   return (
     <DashboardLayout>
 
-      <div  className="mb-10">
+      <div className="mb-10">
 
         <h1 className="text-4xl font-bold text-white">
           Recruiter Dashboard
@@ -126,7 +126,7 @@ function RecruiterDashboard() {
 
       {/* Analytics Cards */}
 
-      <div data-aos="zoom-in" className="grid gap-6 md:grid-cols-5">
+      <div data-aos="zoom-in" className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-5">
 
         {cards.map((card) => (
           <motion.div
@@ -158,7 +158,7 @@ function RecruiterDashboard() {
 
       {/* Charts Section */}
 
-      <div data-aos="zoom-out-up" className="mt-10 grid gap-8 lg:grid-cols-2">
+      <div className="mt-10 grid gap-8 lg:grid-cols-2">
 
         {/* Doughnut Chart */}
 
@@ -168,11 +168,23 @@ function RecruiterDashboard() {
             Application Status
           </h2>
 
-          <div className="mx-auto max-w-sm">
-            <Doughnut
-              data={chartData}
-            />
-          </div>
+          <div className="mx-auto h-64 w-full max-w-xs sm:max-w-sm">
+  <Doughnut
+    data={chartData}
+    options={{
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            color: "#ffffff",
+          },
+        },
+      },
+    }}
+  />
+</div>
 
         </div>
 
@@ -200,13 +212,12 @@ function RecruiterDashboard() {
               <div className="h-3 rounded-full bg-slate-800">
                 <div
                   style={{
-                    width: `${
-                      analytics.totalApplications
+                    width: `${analytics.totalApplications
                         ? (analytics.pending /
-                            analytics.totalApplications) *
-                          100
+                          analytics.totalApplications) *
+                        100
                         : 0
-                    }%`,
+                      }%`,
                   }}
                   className="h-3 rounded-full bg-yellow-400"
                 />
@@ -227,13 +238,12 @@ function RecruiterDashboard() {
               <div className="h-3 rounded-full bg-slate-800">
                 <div
                   style={{
-                    width: `${
-                      analytics.totalApplications
+                    width: `${analytics.totalApplications
                         ? (analytics.shortlisted /
-                            analytics.totalApplications) *
-                          100
+                          analytics.totalApplications) *
+                        100
                         : 0
-                    }%`,
+                      }%`,
                   }}
                   className="h-3 rounded-full bg-green-500"
                 />
@@ -254,13 +264,12 @@ function RecruiterDashboard() {
               <div className="h-3 rounded-full bg-slate-800">
                 <div
                   style={{
-                    width: `${
-                      analytics.totalApplications
+                    width: `${analytics.totalApplications
                         ? (analytics.rejected /
-                            analytics.totalApplications) *
-                          100
+                          analytics.totalApplications) *
+                        100
                         : 0
-                    }%`,
+                      }%`,
                   }}
                   className="h-3 rounded-full bg-red-500"
                 />
@@ -270,92 +279,89 @@ function RecruiterDashboard() {
           </div>
 
         </div>
-         <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-8">
+        <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8">
 
-  <h2 className="mb-6 text-2xl font-semibold text-white">
-    Recent Applications
-  </h2>
+          <h2 className="mb-6 text-2xl font-semibold text-white">
+            Recent Applications
+          </h2>
 
-  {analytics.recentApplications
-    ?.length === 0 ? (
-    <p className="text-slate-400">
-      No applications yet.
-    </p>
-  ) : (
-    <div className="space-y-4">
+          {analytics.recentApplications
+            ?.length === 0 ? (
+            <p className="text-slate-400">
+              No applications yet.
+            </p>
+          ) : (
+            <div className="space-y-4">
 
-      {analytics.recentApplications.map(
-        (application) => (
-          <motion.div
-            key={
-              application._id
-            }
-            whileHover={{
-              scale: 1.01,
-            }}
-            className="flex items-center justify-between rounded-2xl border border-slate-800 p-4 transition"
-          >
+              {analytics.recentApplications.map(
+                (application) => (
+                  <motion.div
+                    key={
+                      application._id
+                    }
+                    whileHover={{
+                      scale: 1.01,
+                    }}
+                    className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl border border-slate-800 p-4 transition"
+                  >
 
-            <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4">
 
-              <img
-                src={
-                  application
-                    .applicant
-                    ?.profilePicture ||
-                  "https://placehold.net/avatar-5.svg"
-                }
-                alt=""
-                className="h-12 w-12 rounded-full object-cover"
-              />
+                      <img
+                        src={
+                          application
+                            .applicant
+                            ?.profilePicture ||
+                          "https://placehold.net/avatar-5.svg"
+                        }
+                        alt=""
+                        className="h-12 w-12 rounded-full object-cover"
+                      />
 
-              <div>
+                      <div>
 
-                <h3 className="font-medium text-white">
-                  {
-                    application
-                      .applicant
-                      ?.fullName
-                  }
-                </h3>
+                        <h3 className="font-medium text-white">
+                          {
+                            application
+                              .applicant
+                              ?.fullName
+                          }
+                        </h3>
 
-                <p className="text-sm text-slate-400">
-                  Applied for{" "}
-                  {
-                    application
-                      .job
-                      ?.title
-                  }
-                </p>
+                        <p className="text-sm text-slate-400">
+                          Applied for{" "}
+                          {
+                            application
+                              .job
+                              ?.title
+                          }
+                        </p>
 
-              </div>
+                      </div>
+
+                    </div>
+
+                    <span
+                      className={`w-fit rounded-full px-3 py-1 text-sm font-medium ${application.status ===
+                          "Shortlisted"
+                          ? "bg-green-500/20 text-green-400"
+                          : application.status ===
+                            "Rejected"
+                            ? "bg-red-500/20 text-red-400"
+                            : "bg-yellow-500/20 text-yellow-400"
+                        }`}
+                    >
+                      {application.status.charAt(0).toUpperCase() + application.status.slice(1).toLowerCase()}
+                    </span>
+
+                  </motion.div>
+                )
+              )}
 
             </div>
+          )}
 
-            <span
-              className={`rounded-full px-3 py-1 text-sm font-medium ${
-                application.status ===
-                "shortlisted"
-                  ? "bg-green-500/20 text-green-400"
-                  : application.status ===
-                    "rejected"
-                  ? "bg-red-500/20 text-red-400"
-                  : "bg-yellow-500/20 text-yellow-400"
-              }`}
-            >
-              {
-                application.status
-              }
-            </span>
-
-          </motion.div>
-        )
-      )}
-
-    </div>
-  )}
-
-</div>
+        </div>
 
       </div>
 
