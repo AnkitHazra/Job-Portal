@@ -43,7 +43,7 @@ function FeaturesSection() {
       <div className="relative mx-auto max-w-7xl px-6">
 
         {/* Heading */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div data-aos="zoom-in-down" className="mx-auto max-w-3xl text-center">
 
           <span className="rounded-full border border-slate-700 px-4 py-2 text-sm text-slate-300">
             Core Features
@@ -65,7 +65,7 @@ function FeaturesSection() {
         </div>
 
         {/* Cards */}
-        <div className="mt-20 grid gap-8 lg:grid-cols-3">
+        <div data-aos="zoom-out-up" className="mt-20 grid gap-8 lg:grid-cols-3">
 
           {features.map((feature) => {
             const Icon = feature.icon;

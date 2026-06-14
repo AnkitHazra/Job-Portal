@@ -81,7 +81,7 @@ function DashboardLayout({ children }) {
           }`}
         >
 
-          <div className="border-b border-slate-800 p-6">
+          <div  className="border-b border-slate-800 p-6">
 
             <h1 className="text-2xl font-bold text-white">
               Recruiter Panel

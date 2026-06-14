@@ -5,6 +5,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+
 function StatsSection() {
   const stats = [
     {
@@ -42,7 +43,7 @@ function StatsSection() {
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Heading */}
-        <div className="text-center">
+        <div data-aos="zoom-in-up" className="text-center">
 
           <span className="rounded-full border border-slate-700 px-4 py-2 text-sm text-slate-300">
             Trusted By Recruiters
@@ -60,7 +61,7 @@ function StatsSection() {
         </div>
 
         {/* Stats Grid */}
-        <div className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div data-aos="zoom-out-up" className="mt-20 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
 
           {stats.map((stat) => {
             const Icon = stat.icon;

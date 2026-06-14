@@ -112,7 +112,7 @@ function RecruiterDashboard() {
   return (
     <DashboardLayout>
 
-      <div className="mb-10">
+      <div  className="mb-10">
 
         <h1 className="text-4xl font-bold text-white">
           Recruiter Dashboard
@@ -126,7 +126,7 @@ function RecruiterDashboard() {
 
       {/* Analytics Cards */}
 
-      <div className="grid gap-6 md:grid-cols-5">
+      <div data-aos="zoom-in" className="grid gap-6 md:grid-cols-5">
 
         {cards.map((card) => (
           <motion.div
@@ -158,7 +158,7 @@ function RecruiterDashboard() {
 
       {/* Charts Section */}
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+      <div data-aos="zoom-out-up" className="mt-10 grid gap-8 lg:grid-cols-2">
 
         {/* Doughnut Chart */}
 

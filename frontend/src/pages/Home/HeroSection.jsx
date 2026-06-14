@@ -5,33 +5,35 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link } from 'react-router-dom';
+import {motion} from 'framer-motion';
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-slate-950 text-white">
+    <section className="pt-8 md:pt-12 bg-slate-950 text-white">
 
       {/* Background Glow */}
-      <div className="absolute left-0 top-0 h-125 w-125 rounded-full bg-blue-600/20 blur-3xl"></div>
 
-      <div className="absolute right-0 top-0 h-125 w-125 rounded-full bg-violet-600/20 blur-3xl"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-slate-950 to-transparent"></div>
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
 
         <div className="grid items-center gap-16 lg:grid-cols-2">
 
           {/* LEFT SIDE */}
-          <div>
+          <div data-aos="fade-right" >
 
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-sm text-blue-300">
               <Sparkles size={16} />
               AI Powered Recruitment Platform
             </div>
 
-            <h1 className="mt-8 text-6xl font-bold leading-tight md:text-7xl">
+            <motion.h1  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }} className="mt-8 text-6xl font-bold leading-tight md:text-7xl">
               Hire Smarter.
               <br />
               Match Faster.
-            </h1>
+            </motion.h1>
 
             <p className="mt-8 max-w-xl text-lg text-slate-400">
               AI-powered hiring platform that helps
@@ -52,7 +54,7 @@ function HeroSection() {
           </div>
 
           {/* RIGHT SIDE */}
-          <div>
+          <div data-aos="fade-left">
 
             <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl">
 
@@ -116,20 +118,20 @@ function HeroSection() {
           </div>
 
         </div>
-<div className="mt-12 flex justify-center  gap-6 text-xl text-slate-400">
-
-  <div>
-    ✓ AI Resume Analysis
-  </div>
-
-  <div>
-    ✓ Smart Job Matching
-  </div>
-
-  <div>
-    ✓ Interview Preparation
-  </div>
-
+<div data-aos="fade-down" className="mt-12 flex flex-wrap justify-center gap-8">
+  {[
+    "AI Resume Analysis",
+    "Smart Job Matching",
+    "Interview Preparation"
+  ].map((feature, idx) => (
+    <div
+      key={idx}
+      className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white/50 px-6 py-3 text-slate-700 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:border-emerald-500 dark:hover:bg-emerald-900/20"
+    >
+      <span className="text-xl text-emerald-500 transition-transform duration-300 group-hover:scale-110">✓</span>
+      <span className="font-medium">{feature}</span>
+    </div>
+  ))}
 </div>
       </div>
 

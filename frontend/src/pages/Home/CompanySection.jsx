@@ -33,7 +33,7 @@ function CompanySection() {
     >
       <div className="mx-auto max-w-7xl px-6">
 
-        <div className="text-center">
+        <div data-aos="zoom-in-down" className="text-center">
 
           <span className="rounded-full border border-slate-700 px-4 py-2 text-sm text-slate-300">
             Trusted Companies
@@ -49,12 +49,12 @@ function CompanySection() {
 
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div  data-aos="zoom-out-up" className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
           {companies.map((company) => (
             <div
               key={company.name}
-              className="group rounded-3xl border border-slate-800 bg-slate-900 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500"
+              className="group rounded-3xl border border-slate-800 bg-slate-900 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500 "
             >
 
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-linear-to-br from-blue-500 to-violet-600 text-2xl font-bold text-white">

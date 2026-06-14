@@ -51,7 +51,7 @@ function CompaniesPage() {
 
       </div>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div data-aos="zoom-out-up" className="mt-10 grid gap-6 md:grid-cols-2">
 
         {companies.map(
           (company) => (
