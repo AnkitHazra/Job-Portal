@@ -2,13 +2,14 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,
+  useState,navigate
 } from "react";
 
 import {
   loginUser,
   registerUser,
   getCurrentUser,
+  logout
 } from "../api/authApi";
 
 const AuthContext = createContext();
@@ -61,13 +62,14 @@ export const AuthProvider = ({
   };
 
 
-  const logout = () => {
-    localStorage.removeItem("token");
+  const logout = async () => {
+  try {
+    await logoutUser();
     setUser(null);
-    navigate("/", {
-      replace: true,
-    });
-  };
+  } catch (error) {
+    console.log(error);
+  }
+};
   return (
     <AuthContext.Provider
       value={{
