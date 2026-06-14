@@ -9,7 +9,7 @@ import {
   loginUser,
   registerUser,
   getCurrentUser,
-  logout
+  logoutUser
 } from "../api/authApi";
 
 const AuthContext = createContext();
