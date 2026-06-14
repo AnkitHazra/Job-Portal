@@ -114,7 +114,7 @@ function RecruiterDashboard() {
 
       <div className="mb-10">
 
-        <h1 className="text-4xl font-bold text-white">
+        <h1 className="text-4xl font-bold text-white mt-20">
           Recruiter Dashboard
         </h1>
 

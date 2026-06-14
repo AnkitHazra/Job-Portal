@@ -27,7 +27,8 @@ import { getMyApplications } from "../../api/applicationApi";
 
 function CandidateDashboard() {
 
-  const { user } = useAuth();
+  const { user} = useAuth();
+  
 
   const [applications, setApplications] =
     useState([]);
@@ -105,7 +106,7 @@ function CandidateDashboard() {
   return (
     <div className=" bg-slate-950 p-8">
 
-      <h1 className="text-4xl font-bold text-white">
+      <h1 className="text-4xl font-bold text-white mt-20">
         Candidate Dashboard
       </h1>
 
@@ -119,9 +120,9 @@ function CandidateDashboard() {
           <img
             src={
               user?.profilePicture ||
-              "https://placehold.co/100x100"
+              "https://placehold.net/avatar-4.png"
             }
-            alt=""
+            alt="Profile Picture"
             className="h-24 w-24 rounded-full border-4 border-blue-500 object-cover"
           />
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 function CTASection() {
   return (
     <section className="bg-slate-950 px-6 pb-32 ">
@@ -15,13 +16,13 @@ function CTASection() {
 
         <div data-aos="zoom-out-up" className="mt-10 flex flex-wrap justify-center gap-4">
 
-          <button className="rounded-xl bg-white px-6 py-3 font-semibold text-slate-900">
+          <Link to='/login' className="rounded-xl bg-white px-6 py-3 font-semibold text-slate-900">
             Get Started
-          </button>
+          </Link>
 
-          <button className="rounded-xl border border-white/30 px-6 py-3 font-semibold">
+          <a href="https://www.linkedin.com/in/hazraankit2005/" className="rounded-xl border border-white/30 px-6 py-3 font-semibold">
             Learn More
-          </button>
+          </a>
 
         </div>
 
