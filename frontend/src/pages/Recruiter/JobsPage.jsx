@@ -57,7 +57,7 @@ function JobsPage() {
   return (
     <DashboardLayout>
 
-      <div className="flex items-center justify-between">
+      <div data-aos="fade" className="flex items-center justify-between mt-15 sm:mt-0">
 
         <div>
           <h1 className="text-4xl font-bold text-white">
@@ -97,8 +97,8 @@ function JobsPage() {
 
         </div>
       ) : (
-        <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
-  <div className="overflow-x-auto">
+        <div  className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 overflow-hidden">
+  <div  className="overflow-x-auto">
     <table className="w-full min-w-250">
 
       <thead className="border-b border-slate-800">
@@ -133,6 +133,7 @@ function JobsPage() {
         {jobs.map((job) => (
           <tr
             key={job._id}
+            data-aos="fade"
             className="border-b border-slate-800 hover:bg-slate-800/50"
           >
             <td className="px-6 py-4 text-white whitespace-nowrap">

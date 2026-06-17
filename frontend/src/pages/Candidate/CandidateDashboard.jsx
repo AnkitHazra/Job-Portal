@@ -104,16 +104,16 @@ function CandidateDashboard() {
     ],
   };
   return (
-    <div className=" bg-slate-950 p-8">
+    <div  className=" bg-slate-950 p-8 mt-10 sm:mt-0">
 
-      <h1 className="text-4xl font-bold text-white mt-20">
+      <h1 className="text-4xl font-bold text-white ">
         Candidate Dashboard
       </h1>
 
       <p className="mt-2 text-slate-400">
         Track your applications and opportunities.
       </p>
-      <div className="mt-8  rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div data-aos="zoom-in-down" className="mt-8  rounded-3xl border border-slate-800 bg-slate-900 p-6">
 
         <div className="flex flex-col  gap-4 sm:flex-row sm:items-center">
 
@@ -147,7 +147,7 @@ function CandidateDashboard() {
 
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div data-aos="zoom-in-up" className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
 
         <motion.div
           whileHover={{
@@ -215,7 +215,7 @@ function CandidateDashboard() {
 
       </div>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-2">
+      <div data-aos="zoom-in-down" className="mt-10 grid gap-6 lg:grid-cols-2">
 
         <div className="rounded-3xl border border-slate-800 bg-slate-900 p-6">
 
@@ -334,7 +334,7 @@ function CandidateDashboard() {
 
       </div>
 
-      <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-6">
+      <div data-aos="zoom-in-up" className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-6">
 
         <h2 className="mb-6 text-2xl font-semibold text-white">
           Recent Applications

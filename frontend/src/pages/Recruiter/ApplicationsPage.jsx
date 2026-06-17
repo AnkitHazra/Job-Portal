@@ -23,7 +23,7 @@ function ApplicationsPage() {
 
     return (
         <DashboardLayout>
-            <h1 className="mb-8 text-4xl font-bold text-white">Applications</h1>
+            <h1 className="mb-8 text-4xl font-bold text-white mt-15 sm:mt-0">Applications</h1>
 
             <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
                   <div className="overflow-x-auto">

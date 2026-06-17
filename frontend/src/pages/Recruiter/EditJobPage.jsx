@@ -154,7 +154,7 @@ function EditJobPage() {
   return (
     <DashboardLayout>
 
-      <h1 className="mb-8 text-4xl font-bold text-white">
+      <h1 className="mb-8 text-4xl font-bold text-white mt-12 sm:mt-0">
         Edit Job
       </h1>
 

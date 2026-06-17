@@ -112,9 +112,9 @@ function RecruiterDashboard() {
   return (
     <DashboardLayout>
 
-      <div className="mb-10">
+      <div className="mb-10 mt-15 sm:mt-0">
 
-        <h1 className="text-4xl font-bold text-white mt-20">
+        <h1 className="text-4xl font-bold text-white">
           Recruiter Dashboard
         </h1>
 
@@ -158,7 +158,7 @@ function RecruiterDashboard() {
 
       {/* Charts Section */}
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-2">
+      <div data-aos="zoom-in-up" className="mt-10 grid gap-8 lg:grid-cols-2">
 
         {/* Doughnut Chart */}
 
@@ -168,7 +168,7 @@ function RecruiterDashboard() {
             Application Status
           </h2>
 
-          <div className="mx-auto h-64 w-full max-w-xs sm:max-w-sm">
+          <div  className="mx-auto h-64 w-full max-w-xs sm:max-w-sm">
   <Doughnut
     data={chartData}
     options={{
@@ -190,7 +190,7 @@ function RecruiterDashboard() {
 
         {/* Hiring Overview */}
 
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8">
+        <div data-aos="zoom-in-down" className="rounded-3xl border border-slate-800 bg-slate-900 p-8">
 
           <h2 className="mb-6 text-2xl font-semibold text-white">
             Hiring Overview
@@ -279,7 +279,7 @@ function RecruiterDashboard() {
           </div>
 
         </div>
-        <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8">
+        <div data-aos="zoom-in-up" className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8">
 
           <h2 className="mb-6 text-2xl font-semibold text-white">
             Recent Applications

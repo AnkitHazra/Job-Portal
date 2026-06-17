@@ -48,7 +48,7 @@ function ApplicantsPage() {
 
   return (
     <DashboardLayout>
-      <div className="bg-slate-950 p-4 md:p-8">
+      <div className="bg-slate-950 p-4 md:p-8 mt-15 sm:mt-0">
 
         <h1 className="mb-8 text-3xl md:text-4xl font-bold text-white">
           Applicants

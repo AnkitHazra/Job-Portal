@@ -82,7 +82,7 @@ function CreateJobPage() {
   return (
     <DashboardLayout>
 
-      <h1 className="mb-8 text-4xl font-bold text-white">
+      <h1 className="mb-8 text-4xl font-bold text-white mt-15 sm:mt-0">
         Create Job
       </h1>
 

@@ -58,7 +58,7 @@ function JobDetailsPage() {
     }
 
     return (
-        <div className=" bg-slate-950 px-6 py-12">
+        <div className=" bg-slate-950 px-6 py-12 mt-12 sm:mt-0">
 
             <div className="mx-auto max-w-5xl">
 

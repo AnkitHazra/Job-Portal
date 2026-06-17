@@ -64,7 +64,7 @@ function JobsPage() {
 
 
   return (
-    <div className=" bg-slate-950 px-6 py-10">
+    <div className=" bg-slate-950 px-6 py-10 mt-10 sm:mt-0">
 
       <div className="mx-auto max-w-7xl">
 
@@ -77,7 +77,7 @@ function JobsPage() {
         </p>
 
 
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
+        <div data-aos="zoom-in-down" className="mt-8 grid gap-4 md:grid-cols-3">
 
           <input
             type="text"
@@ -151,7 +151,7 @@ function JobsPage() {
 
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div data-aos="zoom-in-up" className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
           {filteredJobs.map((job) => (
             <JobCard

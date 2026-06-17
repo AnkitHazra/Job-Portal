@@ -32,7 +32,7 @@ function CompaniesPage() {
   return (
     <DashboardLayout>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-15 sm:mt-0">
 
         <h1 className="text-4xl font-bold text-white">
           Companies

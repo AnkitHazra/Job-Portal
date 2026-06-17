@@ -47,7 +47,7 @@ function MyApplications() {
   };
 
   return (
-    <div className=" bg-slate-950 px-4 md:px-6 py-8 md:py-12">
+    <div className=" bg-slate-950 px-4 md:px-6 py-8 md:py-12 mt-10 sm:mt-0">
 
       <div className="mx-auto max-w-7xl">
 
@@ -64,7 +64,7 @@ function MyApplications() {
             Loading...
           </div>
         ) : applications.length === 0 ? (
-          <div className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-12 text-center">
+          <div  className="mt-10 rounded-3xl border border-slate-800 bg-slate-900 p-12 text-center">
 
             <h2 className="text-2xl font-semibold text-white">
               No Applications Yet
@@ -79,7 +79,7 @@ function MyApplications() {
           <>
             {/* Desktop Table */}
 
-            <div className="hidden md:block mt-10 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
+            <div data-aos="zoom-in-up" className="hidden md:block mt-10 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900">
 
               <table className="w-full">
 
@@ -159,7 +159,7 @@ function MyApplications() {
 
             {/* Mobile Cards */}
 
-            <div className="mt-8 space-y-4 md:hidden px-1">
+            <div data-aos="zoom-in-up" className="mt-8 space-y-4 md:hidden px-1">
 
               {applications.map(
                 (application) => (
