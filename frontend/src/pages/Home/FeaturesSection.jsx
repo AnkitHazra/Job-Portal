@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Brain,
@@ -13,7 +14,6 @@ import {
   CheckCircle2,
   Target,
   ChevronDown,
-  X,
 } from "lucide-react";
 
 function FeaturesSection() {
@@ -154,13 +154,13 @@ function FeaturesSection() {
   };
 
   const expandedContentVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       height: 0,
       marginTop: 0,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       height: "auto",
       marginTop: 24,
       transition: {
@@ -198,7 +198,6 @@ function FeaturesSection() {
     <section id="features" className="relative bg-linear-to-b from-slate-950 via-slate-900 to-slate-950 py-32 text-white overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        {/* Animated Orbs */}
         <motion.div
           animate={{
             scale: [1, 1.3, 1],
@@ -235,9 +234,7 @@ function FeaturesSection() {
           }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full bg-emerald-600/5 blur-3xl"
         />
-
-        {/* Grid Pattern */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `radial-linear(circle at 1px 1px, white 1px, transparent 0)`,
@@ -285,11 +282,10 @@ function FeaturesSection() {
             variants={itemVariants}
             className="mt-6 text-lg leading-relaxed text-slate-400 max-w-2xl mx-auto"
           >
-            Recruiters and candidates get powerful AI tools that streamline 
+            Recruiters and candidates get powerful AI tools that streamline
             hiring, improve matching, and increase interview success.
           </motion.p>
 
-          {/* Additional Feature Pills */}
           <motion.div
             variants={itemVariants}
             className="mt-8 flex flex-wrap justify-center gap-3"
@@ -332,20 +328,15 @@ function FeaturesSection() {
                 custom={index}
                 variants={cardVariants}
                 whileHover={!isExpanded ? "hover" : undefined}
-                className={`group relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-8 transition-all ${
-                  isExpanded ? 'lg:col-span-3 lg:row-span-1' : ''
-                }`}
+                className={`group relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-8 transition-all ${isExpanded ? 'lg:col-span-3 lg:row-span-1' : ''
+                  }`}
               >
-                {/* Card Glow Background */}
                 <div
                   className={`absolute inset-0 bg-linear-to-br ${feature.linear} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
-
-                {/* Top Border linear */}
                 <div className={`absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r ${feature.borderGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
 
                 <div className="relative z-10">
-                  {/* Icon */}
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.5 }}
@@ -354,7 +345,6 @@ function FeaturesSection() {
                     <Icon size={28} />
                   </motion.div>
 
-                  {/* Title & Description */}
                   <h3 className="mt-8 text-2xl font-semibold text-white group-hover:text-transparent group-hover:bg-linear-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-blue-200 transition-all">
                     {feature.title}
                   </h3>
@@ -363,7 +353,6 @@ function FeaturesSection() {
                     {feature.description}
                   </p>
 
-                  {/* Stats */}
                   <div className="mt-6 grid grid-cols-2 gap-4">
                     {feature.stats.map((stat, i) => (
                       <motion.div
@@ -382,7 +371,6 @@ function FeaturesSection() {
                     ))}
                   </div>
 
-                  {/* Learn More Button */}
                   <motion.button
                     whileHover={{ x: 5 }}
                     onClick={() => handleCardClick(index)}
@@ -390,7 +378,7 @@ function FeaturesSection() {
                   >
                     {isExpanded ? 'Show Less' : 'Learn More'}
                     <motion.span
-                      animate={{ 
+                      animate={{
                         x: isExpanded ? 0 : [0, 3, 0],
                         rotate: isExpanded ? 180 : 0
                       }}
@@ -401,7 +389,6 @@ function FeaturesSection() {
                   </motion.button>
                 </div>
 
-                {/* Expanded Content */}
                 <AnimatePresence>
                   {isExpanded && (
                     <motion.div
@@ -413,13 +400,12 @@ function FeaturesSection() {
                     >
                       <div className="border-t border-slate-700/50 pt-6">
                         <div className="grid lg:grid-cols-2 gap-8">
-                          {/* Overview & Benefits */}
                           <div>
                             <h4 className="text-lg font-semibold text-white mb-4">Overview</h4>
                             <p className="text-slate-400 leading-relaxed">
                               {feature.detailedDescription.overview}
                             </p>
-                            
+
                             <div className="mt-6 p-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
                               <div className="flex items-center gap-2 mb-3">
                                 <Star className="h-4 w-4 text-amber-400" />
@@ -431,7 +417,6 @@ function FeaturesSection() {
                             </div>
                           </div>
 
-                          {/* Feature List */}
                           <div>
                             <h4 className="text-lg font-semibold text-white mb-4">Key Features</h4>
                             <div className="space-y-3">
@@ -457,10 +442,7 @@ function FeaturesSection() {
                   )}
                 </AnimatePresence>
 
-                {/* Bottom Corner Decoration */}
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-linear-to-tl from-blue-500/5 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Decorative Dots */}
                 <div className="absolute top-4 right-4 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="h-1.5 w-1.5 rounded-full bg-blue-400" />
                   <div className="h-1.5 w-1.5 rounded-full bg-violet-400" />
@@ -479,15 +461,17 @@ function FeaturesSection() {
           transition={{ delay: 0.8 }}
           className="mt-20 text-center"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700 transition-all"
-          >
-            <Star size={20} />
-            Explore All Features
-            <ArrowRight size={20} />
-          </motion.button>
+          <Link to="/register">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-blue-500 to-indigo-600 px-8 py-4 font-semibold text-white shadow-lg shadow-blue-500/25 hover:from-blue-600 hover:to-indigo-700 transition-all"
+            >
+              <Star size={20} />
+              Explore All Features
+              <ArrowRight size={20} />
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>
