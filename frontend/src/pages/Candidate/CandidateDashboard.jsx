@@ -180,7 +180,7 @@ function CandidateDashboard() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 py-8 px-4 sm:px-6 lg:px-8 mt-10 sm:mt-0"
+      className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 py-8 px-4 sm:px-6 lg:px-8 mt-10 sm:mt-0"
     >
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
@@ -195,7 +195,7 @@ function CandidateDashboard() {
               initial={{ height: 0 }}
               animate={{ height: 48 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-1.5 rounded-full bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500"
+              className="w-1.5 rounded-full bg-linear-to-b from-blue-400 via-indigo-400 to-purple-500"
             />
             <div>
               <motion.h1
@@ -418,9 +418,9 @@ function CandidateDashboard() {
               </div>
               <div className="space-y-6">
                 {[
-                  { label: "Pending", value: pending, color: "bg-amber-400", textColor: "text-amber-400", gradient: "from-amber-400 to-yellow-500" },
-                  { label: "Shortlisted", value: shortlisted, color: "bg-emerald-500", textColor: "text-emerald-400", gradient: "from-emerald-400 to-green-500" },
-                  { label: "Rejected", value: rejected, color: "bg-rose-500", textColor: "text-rose-400", gradient: "from-rose-400 to-red-500" },
+                  { label: "Pending", value: pending, color: "bg-amber-400", textColor: "text-amber-400", linear: "from-amber-400 to-yellow-500" },
+                  { label: "Shortlisted", value: shortlisted, color: "bg-emerald-500", textColor: "text-emerald-400", linear: "from-emerald-400 to-green-500" },
+                  { label: "Rejected", value: rejected, color: "bg-rose-500", textColor: "text-rose-400", linear: "from-rose-400 to-red-500" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -445,7 +445,7 @@ function CandidateDashboard() {
                         variants={progressBarVariants}
                         initial="hidden"
                         animate="visible"
-                        className={`h-full rounded-full bg-gradient-to-r ${item.gradient} shadow-lg`}
+                        className={`h-full rounded-full bg-linear-to-r ${item.linear} shadow-lg`}
                       />
                     </div>
                   </motion.div>
@@ -528,7 +528,7 @@ function CandidateDashboard() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-6 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
+                    className="mt-6 rounded-xl bg-linear-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
                   >
                     Browse Jobs
                   </motion.button>

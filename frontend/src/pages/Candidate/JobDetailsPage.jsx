@@ -118,7 +118,7 @@ function JobDetailsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -146,7 +146,7 @@ function JobDetailsPage() {
 
   if (!job) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -165,7 +165,7 @@ function JobDetailsPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => navigate("/jobs")}
-            className="rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
+            className="rounded-xl bg-linear-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
           >
             Back to Jobs
           </motion.button>
@@ -179,7 +179,7 @@ function JobDetailsPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 sm:px-6 lg:px-8 py-8 mt-1 sm:mt-0"
+      className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 sm:px-6 lg:px-8 py-8 mt-1 sm:mt-0"
     >
       <div className="mx-auto max-w-5xl">
         {/* Back Button */}
@@ -216,7 +216,7 @@ function JobDetailsPage() {
                 >
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg"
+                    className="h-16 w-16 rounded-2xl bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg"
                   >
                     {job.company?.name?.charAt(0) || "C"}
                   </motion.div>
@@ -308,7 +308,7 @@ function JobDetailsPage() {
                   className={`inline-flex items-center justify-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold shadow-lg transition-all ${
                     isApplied
                       ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-not-allowed"
-                      : "bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/25"
+                      : "bg-linear-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/25"
                   } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   {applying ? (
@@ -359,7 +359,7 @@ function JobDetailsPage() {
             {/* Divider */}
             <motion.div
               variants={fadeInUp}
-              className="my-8 h-px bg-gradient-to-r from-transparent via-slate-700/50 to-transparent"
+              className="my-8 h-px bg-linear-to-r from-transparent via-slate-700/50 to-transparent"
             />
 
             {/* Job Description */}
@@ -439,7 +439,7 @@ function JobDetailsPage() {
                   className={`inline-flex items-center gap-2 rounded-xl px-8 py-3.5 text-sm font-semibold shadow-lg transition-all ${
                     isApplied
                       ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 cursor-not-allowed"
-                      : "bg-gradient-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/25"
+                      : "bg-linear-to-r from-blue-500 to-indigo-600 text-white hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/25"
                   } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   {isApplied ? (

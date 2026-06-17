@@ -192,7 +192,7 @@ function MyApplications() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 sm:px-6 lg:px-8 py-8 mt-10 sm:mt-0"
+      className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 px-4 sm:px-6 lg:px-8 py-8 mt-10 sm:mt-0"
     >
       <div className="mx-auto max-w-7xl">
         {/* Header Section */}
@@ -207,7 +207,7 @@ function MyApplications() {
               initial={{ height: 0 }}
               animate={{ height: 48 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-1.5 rounded-full bg-gradient-to-b from-blue-400 via-indigo-400 to-purple-500"
+              className="w-1.5 rounded-full bg-linear-to-b from-blue-400 via-indigo-400 to-purple-500"
             />
             <div>
               <motion.h1
@@ -385,7 +385,7 @@ function MyApplications() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/jobs")}
-                className="rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
+                className="rounded-xl bg-linear-to-r from-blue-500 to-indigo-600 px-6 py-3 text-sm font-medium text-white shadow-lg shadow-blue-500/25"
               >
                 Browse Jobs
               </motion.button>
