@@ -2,7 +2,7 @@ import {
   createContext,
   useContext,
   useEffect,
-  useState,navigate
+  useState,
 } from "react";
 
 import {
@@ -18,58 +18,69 @@ export const AuthProvider = ({
   children,
 }) => {
   const [user, setUser] = useState(null);
-
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
   const fetchUser = async () => {
     try {
-      const data =
-        await getCurrentUser();
-
+      const data = await getCurrentUser();
       setUser(data.user);
-    } catch {
+      // Store in localStorage for persistence
+      localStorage.setItem('user', JSON.stringify(data.user));
+    } catch (error) {
       setUser(null);
+      localStorage.removeItem('user');
     } finally {
       setLoading(false);
     }
   };
 
+  // Load user from localStorage immediately (faster)
   useEffect(() => {
-    fetchUser();
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+        setLoading(false);
+      } catch (e) {
+        // If parsing fails, fetch from API
+        fetchUser();
+      }
+    } else {
+      fetchUser();
+    }
   }, []);
 
-  const register = async (
-    userData
-  ) => {
-    const data = await registerUser(
-      userData
-    );
-
+  const register = async (userData) => {
+    const data = await registerUser(userData);
     return data;
   };
 
-  const login = async (
-    userData
-  ) => {
-    const data = await loginUser(
-      userData
-    );
-
+  const login = async (userData) => {
+    const data = await loginUser(userData);
+    
+    // ✅ Set user immediately from login response
     setUser(data.user);
-
+    localStorage.setItem('user', JSON.stringify(data.user));
+    
+    // ✅ Optionally fetch fresh data in background
+    // This updates the user with complete profile data
+    fetchUser();
+    
     return data;
   };
-
 
   const logout = async () => {
-  try {
-    await logoutUser();
-    setUser(null);
-  } catch (error) {
-    console.log(error);
-  }
-};
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUser(null);
+      localStorage.removeItem('user');
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
