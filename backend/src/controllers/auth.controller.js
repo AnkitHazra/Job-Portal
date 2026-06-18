@@ -1,9 +1,7 @@
-import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import generateToken from "../utils/generateToken.js";
 
-//REGISTER 
-
+// REGISTER
 export const register = async (req, res) => {
   try {
     const { fullName, email, password, role } = req.body;
@@ -28,7 +26,16 @@ export const register = async (req, res) => {
       fullName,
       email,
       password,
-      role,
+      role: role || "user", // Default role if not provided
+    });
+
+    // Optionally generate token and set cookie here for auto-login
+    const token = generateToken(user._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(201).json({
@@ -49,9 +56,7 @@ export const register = async (req, res) => {
   }
 };
 
-//LOGIN
-
-
+// LOGIN
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -63,9 +68,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).select(
-      "+password"
-    );
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
       return res.status(401).json({
@@ -74,9 +77,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const isMatch = await user.comparePassword(
-      password
-    );
+    const isMatch = await user.comparePassword(password);
 
     if (!isMatch) {
       return res.status(401).json({
@@ -89,11 +90,8 @@ export const login = async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite:
-        process.env.NODE_ENV === "production"
-          ? "none"
-          : "lax",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -115,72 +113,13 @@ export const login = async (req, res) => {
   }
 };
 
-//ME
-
+// GET ME
 export const getMe = async (req, res) => {
-  res.status(200).json({
-    success: true,
-    user: req.user,
-  });
-};
-
-//UPDATE PROFILE
-
-export const updateProfile = async (req, res) => {
   try {
-    const {
-      fullName,
-      phone,
-      location,
-      bio,
-      skills,
-      resumeUrl,
-      profilePicture,
-    } = req.body;
-
-    const user = await User.findById(
-      req.user._id
-    );
-
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    user.fullName =
-      fullName || user.fullName;
-
-    user.phone =
-      phone || user.phone;
-
-    user.location =
-      location || user.location;
-
-    user.bio =
-      bio || user.bio;
-
-    user.skills = skills
-      ? skills.split(",").map(
-        (skill) => skill.trim()
-      )
-      : user.skills;
-
-    user.resumeUrl =
-      resumeUrl || user.resumeUrl;
-
-    user.profilePicture =
-      profilePicture ||
-      user.profilePicture;
-
-    await user.save();
-
+    // The user should already be attached by the auth middleware
     res.status(200).json({
       success: true,
-      message:
-        "Profile updated successfully",
-      user,
+      user: req.user,
     });
   } catch (error) {
     res.status(500).json({
@@ -190,16 +129,62 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-//LOGOUT
+// UPDATE PROFILE
+export const updateProfile = async (req, res) => {
+  try {
+    const { fullName, phone, location, bio, skills, resumeUrl, profilePicture } =
+      req.body;
 
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Update fields only if provided
+    if (fullName) user.fullName = fullName;
+    if (phone) user.phone = phone;
+    if (location) user.location = location;
+    if (bio) user.bio = bio;
+    if (resumeUrl) user.resumeUrl = resumeUrl;
+    if (profilePicture) user.profilePicture = profilePicture;
+
+    // Handle skills properly
+    if (skills !== undefined) {
+      user.skills = skills
+        ? skills.split(",").map((skill) => skill.trim()).filter(skill => skill !== "")
+        : [];
+    }
+
+    await user.save();
+
+    // Don't send password in response
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: userResponse,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// LOGOUT
 export const logout = (req, res) => {
-  res.clearCookie("token", {
+  res.cookie("token", "", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite:
-      process.env.NODE_ENV === "production"
-        ? "none"
-        : "lax",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    expires: new Date(0),
   });
 
   res.status(200).json({

@@ -13,7 +13,6 @@ import {
   TrendingUp,
   ArrowRight,
 } from "lucide-react";
-
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
