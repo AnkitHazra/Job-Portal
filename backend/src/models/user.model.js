@@ -98,6 +98,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
+    aiSuggestions: {
+    type: mongoose.Schema.Types.Mixed,
+    default: null
+    },
   },
   {
     timestamps: true,

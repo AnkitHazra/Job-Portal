@@ -1,6 +1,10 @@
 import User from '../models/user.model.js';
 import axios from 'axios';
 import pdfParse from 'pdf-parse-fork';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+// Initialize Gemini
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Common keywords for different job roles
 const jobKeywords = {
@@ -187,6 +191,158 @@ const calculateATSScore = (text, jobTitle) => {
   return result;
 };
 
+// ✅ AI-Powered Suggestions using Gemini (Fixed Model Name)
+const getAISuggestions = async (resumeText, atsScore, keywordsFound, jobTitle) => {
+  try {
+    console.log('🤖 Requesting AI suggestions from Gemini...');
+    
+    // Check if API key is configured
+    if (!process.env.GEMINI_API_KEY) {
+      console.log('⚠️ No Gemini API key found, using fallback');
+      return getFallbackSuggestions(jobTitle, atsScore);
+    }
+
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    
+    // ✅ FIXED: Use gemini-1.5-flash (free, fast, and available)
+    const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+
+    const prompt = `Analyze this resume for a ${jobTitle} position. ATS Score: ${atsScore}/100. Keywords found: ${keywordsFound.join(', ')}.
+
+Resume text:
+${resumeText.substring(0, 3000)}
+
+Return ONLY a JSON object (no markdown, no code blocks) with this structure:
+{
+  "summary": "2-3 sentence assessment of the resume",
+  "strengths": ["strength 1", "strength 2", "strength 3"],
+  "weaknesses": ["weakness 1", "weakness 2", "weakness 3"],
+  "improvementTips": ["tip 1", "tip 2", "tip 3", "tip 4"],
+  "recommendedJobs": [
+    {"title": "Job Title 1", "reason": "why it fits", "matchPercentage": 85},
+    {"title": "Job Title 2", "reason": "why it fits", "matchPercentage": 75},
+    {"title": "Job Title 3", "reason": "why it fits", "matchPercentage": 65}
+  ],
+  "skillsToAdd": ["skill 1", "skill 2", "skill 3"],
+  "certificationsRecommended": ["certification 1", "certification 2"],
+  "resumeFormatSuggestions": "brief formatting advice"
+}`;
+
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    
+    console.log('✅ AI raw response received');
+    console.log('First 200 chars:', text.substring(0, 200));
+    
+    // Clean the response - remove markdown code blocks
+    let cleanedText = text
+      .replace(/```json\n?/g, '')
+      .replace(/```\n?/g, '')
+      .replace(/```/g, '')
+      .trim();
+    
+    // Try to find JSON object in the response
+    const jsonMatch = cleanedText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      cleanedText = jsonMatch[0];
+    }
+    
+    try {
+      const parsed = JSON.parse(cleanedText);
+      console.log('✅ Successfully parsed AI response');
+      console.log('Keys received:', Object.keys(parsed));
+      return parsed;
+    } catch (parseError) {
+      console.log('⚠️ JSON parse error:', parseError.message);
+      console.log('Cleaned text:', cleanedText.substring(0, 300));
+      return getFallbackSuggestions(jobTitle, atsScore);
+    }
+  } catch (error) {
+    console.log('❌ AI error:', error.message);
+    
+    // If model not found, try alternative model name
+    if (error.message.includes('not found')) {
+      console.log('🔄 Trying alternative model...');
+      try {
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        // ... same parsing logic
+      } catch (retryError) {
+        console.log('❌ Retry also failed:', retryError.message);
+      }
+    }
+    
+    return getFallbackSuggestions(jobTitle, atsScore);
+  }
+};
+
+// Fallback suggestions if AI fails
+const getFallbackSuggestions = (jobTitle, atsScore) => {
+  const jobSpecificTips = {
+    'Software Developer': {
+      strengths: ['Technical skills present in resume', 'Relevant experience detected'],
+      weaknesses: ['Could improve keyword optimization', 'Format needs improvement'],
+      improvementTips: [
+        'Add specific technologies and frameworks you have worked with',
+        'Include links to your GitHub or portfolio projects',
+        'Quantify your achievements with metrics and numbers',
+        'Add a technical skills section with proficiency levels'
+      ],
+      recommendedJobs: [
+        { title: 'Junior Software Developer', reason: 'Good starting point to build experience', matchPercentage: 80 },
+        { title: 'Full Stack Developer', reason: 'Skills align with full stack requirements', matchPercentage: 70 },
+        { title: 'Frontend Developer', reason: 'Frontend skills detected in resume', matchPercentage: 65 }
+      ],
+      skillsToAdd: ['System Design', 'Cloud Services (AWS/GCP)', 'Testing Frameworks'],
+      certificationsRecommended: ['AWS Certified Developer', 'Google Cloud Professional Developer'],
+      resumeFormatSuggestions: 'Use a clean single-column layout with clear section headers'
+    },
+    'Data Analyst': {
+      strengths: ['Analytical skills present', 'Tool experience mentioned'],
+      weaknesses: ['Missing statistical background details', 'Limited project examples'],
+      improvementTips: [
+        'Highlight specific data analysis tools you have used',
+        'Include examples of data-driven decisions you made',
+        'Mention any dashboard or visualization work',
+        'Add relevant coursework or training'
+      ],
+      recommendedJobs: [
+        { title: 'Junior Data Analyst', reason: 'Entry-level position matching current skills', matchPercentage: 82 },
+        { title: 'Business Intelligence Analyst', reason: 'Data skills align with BI requirements', matchPercentage: 72 },
+        { title: 'Data Visualization Specialist', reason: 'Potential fit based on skills', matchPercentage: 65 }
+      ],
+      skillsToAdd: ['Machine Learning Basics', 'Advanced Excel', 'Data Warehousing'],
+      certificationsRecommended: ['Google Data Analytics Certificate', 'Microsoft Data Analyst Associate'],
+      resumeFormatSuggestions: 'Include a portfolio section with data projects and visualizations'
+    }
+  };
+
+  const defaultFallback = {
+    summary: `Your resume scored ${atsScore}/100 on the ATS analysis. There is room for improvement to make it more competitive.`,
+    strengths: ['Relevant experience present', 'Some industry keywords found', 'Basic resume structure detected'],
+    weaknesses: ['Keyword optimization needed', 'Missing quantifiable achievements', 'Format could be improved'],
+    improvementTips: [
+      'Tailor your resume specifically for each job application',
+      'Add measurable achievements with numbers and percentages',
+      'Use industry-standard keywords from job descriptions',
+      'Ensure your resume has clear sections with proper headings'
+    ],
+    recommendedJobs: [
+      { title: `${jobTitle}`, reason: 'Your target role - optimize resume for this position', matchPercentage: atsScore },
+      { title: `Junior ${jobTitle}`, reason: 'Consider entry-level positions to gain experience', matchPercentage: atsScore + 10 },
+      { title: `Associate ${jobTitle}`, reason: 'Another pathway into the field', matchPercentage: atsScore + 5 }
+    ],
+    skillsToAdd: ['Project Management', 'Communication', 'Problem Solving'],
+    certificationsRecommended: ['Relevant industry certification', 'Online course completion certificate'],
+    resumeFormatSuggestions: 'Keep resume to 1-2 pages with consistent formatting and bullet points'
+  };
+
+  return jobSpecificTips[jobTitle] || defaultFallback;
+};
+
 // @desc    Analyze user's existing resume from Cloudinary
 // @route   POST /api/resume/analyze-existing
 export const analyzeExistingResume = async (req, res) => {
@@ -226,11 +382,21 @@ export const analyzeExistingResume = async (req, res) => {
 
     console.log('📝 Extracted text length:', text.length, 'characters');
 
+    // Calculate ATS score
     const analysis = calculateATSScore(text, jobTitle);
     
     console.log('📊 ATS Score:', analysis.score);
     console.log('🔑 Keywords found:', analysis.keywords.length);
 
+    // ✅ Get AI suggestions
+    const aiSuggestions = await getAISuggestions(
+      text, 
+      analysis.score, 
+      analysis.keywords, 
+      jobTitle
+    );  
+
+    // Update user with ATS data and AI suggestions
     const updatedUser = await User.findByIdAndUpdate(
       req.user._id,
       {
@@ -246,10 +412,12 @@ export const analyzeExistingResume = async (req, res) => {
           atsSuggestions: analysis.suggestions,
           atsKeywords: analysis.keywords,
           atsJobTitle: jobTitle,
-          atsAnalyzedAt: new Date()
+          atsAnalyzedAt: new Date(),
+          // ✅ Store AI suggestions
+          aiSuggestions: aiSuggestions
         }
       },
-      { new: true }
+      { returnDocument:'after'}
     );
 
     res.status(200).json({
@@ -260,7 +428,8 @@ export const analyzeExistingResume = async (req, res) => {
         suggestions: updatedUser.atsSuggestions,
         keywords: updatedUser.atsKeywords,
         atsJobTitle: updatedUser.atsJobTitle,
-        resumeUrl: updatedUser.resumeUrl
+        resumeUrl: updatedUser.resumeUrl,
+        aiSuggestions: updatedUser.aiSuggestions
       }
     });
   } catch (error) {
@@ -293,7 +462,8 @@ export const getATSData = async (req, res) => {
       atsJobTitle: user.atsJobTitle || '',
       atsAnalyzedAt: user.atsAnalyzedAt || null,
       hasResume: !!user.resumeUrl,
-      resumeUrl: user.resumeUrl || ''
+      resumeUrl: user.resumeUrl || '',
+      aiSuggestions: user.aiSuggestions || null
     });
   } catch (error) {
     console.log(error);
