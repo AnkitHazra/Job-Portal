@@ -6,6 +6,7 @@ import companyRoutes from "./routes/company.routes.js";
 import jobRoutes from "./routes/job.routes.js";
 import applicationRoutes from "./routes/application.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
+import resumeRoutes from './routes/resume.routes.js';
 
 
 const app = express();
@@ -31,5 +32,6 @@ app.use("/api/company", companyRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications",applicationRoutes);
 app.use("/api/upload",uploadRoutes);
+app.use('/api/resume', resumeRoutes);
 
 export default app;

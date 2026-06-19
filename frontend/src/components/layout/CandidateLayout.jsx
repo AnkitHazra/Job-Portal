@@ -45,6 +45,12 @@ function CandidateLayout({ children }) {
       icon: User,
       description: "Manage Profile",
     },
+    {
+      name: "ATS Score",
+      path: "/candidate/ats-score",
+      icon: FileText,
+      description: "Resume Analysis",
+    },
   ];
 
   // Animation variants
@@ -204,11 +210,10 @@ function CandidateLayout({ children }) {
                     <Link
                       to={item.path}
                       onClick={() => setSidebarOpen(false)}
-                      className={`group relative mb-1.5 flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
-                        isActive
+                      className={`group relative mb-1.5 flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${isActive
                           ? "bg-linear-to-r from-blue-500/20 to-indigo-500/20 text-white border border-blue-500/30"
                           : "text-slate-400 hover:bg-slate-800/50 hover:text-white border border-transparent"
-                      }`}
+                        }`}
                     >
                       {isActive && (
                         <motion.div
@@ -218,11 +223,10 @@ function CandidateLayout({ children }) {
                         />
                       )}
                       <div
-                        className={`p-1.5 rounded-lg transition-all ${
-                          isActive
+                        className={`p-1.5 rounded-lg transition-all ${isActive
                             ? "bg-blue-500/20"
                             : "bg-slate-800/50 group-hover:bg-slate-700/50"
-                        }`}
+                          }`}
                       >
                         <Icon
                           size={18}
@@ -359,11 +363,10 @@ function CandidateLayout({ children }) {
                           <Link
                             to={item.path}
                             onClick={() => setSidebarOpen(false)}
-                            className={`group relative mb-1.5 flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
-                              isActive
+                            className={`group relative mb-1.5 flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${isActive
                                 ? "bg-linear-to-r from-blue-500/20 to-indigo-500/20 text-white border border-blue-500/30"
                                 : "text-slate-400 hover:bg-slate-800/50 hover:text-white border border-transparent"
-                            }`}
+                              }`}
                           >
                             {isActive && (
                               <motion.div
@@ -373,11 +376,10 @@ function CandidateLayout({ children }) {
                               />
                             )}
                             <div
-                              className={`p-1.5 rounded-lg transition-all ${
-                                isActive
+                              className={`p-1.5 rounded-lg transition-all ${isActive
                                   ? "bg-blue-500/20"
                                   : "bg-slate-800/50 group-hover:bg-slate-700/50"
-                              }`}
+                                }`}
                             >
                               <Icon
                                 size={18}

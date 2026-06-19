@@ -61,6 +61,39 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
+    // ✅ NEW: ATS Score fields
+    atsScore: {
+      type: Number,
+      default: 0,
+    },
+
+    atsAnalysis: {
+      keywordMatch: { type: Number, default: 0 },
+      formatScore: { type: Number, default: 0 },
+      skillsMatch: { type: Number, default: 0 },
+      experienceScore: { type: Number, default: 0 },
+      educationScore: { type: Number, default: 0 },
+    },
+
+    atsSuggestions: {
+      type: [String],
+      default: [],
+    },
+
+    atsKeywords: {
+      type: [String],
+      default: [],
+    },
+
+    atsJobTitle: {
+      type: String,
+      default: "",
+    },
+
+    atsAnalyzedAt: {
+      type: Date,
+    },
+
     isVerified: {
       type: Boolean,
       default: false,
@@ -77,13 +110,9 @@ userSchema.pre("save", async function () {
   }
   this.password = await bcrypt.hash(this.password, 10);
 });
-userSchema.methods.comparePassword = async function (
-  enteredPassword
-) {
-  return await bcrypt.compare(
-    enteredPassword,
-    this.password
-  );
+
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
 };
 
 const User = mongoose.model("User", userSchema);

@@ -17,6 +17,7 @@ import CandidateLayout from "../components/layout/CandidateLayout";
 import ApplicantsPage from "../pages/Recruiter/ApplicantsPage";
 import ApplicationsPage from "../pages/Recruiter/ApplicationsPage";
 import EditJobPage from "../pages/Recruiter/EditJobPage";
+import ATSScore from "../pages/Candidate/ATSscore";
 
 function AppRoutes() {
   return (
@@ -165,6 +166,16 @@ function AppRoutes() {
         element={
           <ProtectedRoute allowedRoles={["recruiter"]}>
             <EditJobPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/candidate/ats-score"
+        element={
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <CandidateLayout>
+              <ATSScore />
+            </CandidateLayout>
           </ProtectedRoute>
         }
       />
