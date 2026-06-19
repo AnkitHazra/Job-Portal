@@ -113,7 +113,7 @@ function DashboardLayout({ children }) {
           >
             <Sparkles className="h-4 w-4 text-white" />
           </motion.div>
-          <h1 className="text-xl font-bold text-white">Recruiter Panel</h1>
+          <h1 className="text-xl font-bold text-white">Hirevity</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -152,7 +152,7 @@ function DashboardLayout({ children }) {
                   <Sparkles className="h-5 w-5 text-white" />
                 </motion.div>
                 <div>
-                  <h1 className="text-xl font-bold text-white">Recruiter Panel</h1>
+                  <h1 className="text-xl font-bold text-white">Hirevity</h1>
                   <p className="text-xs text-slate-400">Manage hiring operations</p>
                 </div>
               </div>

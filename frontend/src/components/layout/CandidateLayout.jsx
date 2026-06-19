@@ -119,7 +119,7 @@ function CandidateLayout({ children }) {
           >
             <Sparkles className="h-4 w-4 text-white" />
           </motion.div>
-          <h1 className="text-xl font-bold text-white">AI Recruitment</h1>
+          <h1 className="text-xl font-bold text-white">Hirevity</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -158,8 +158,8 @@ function CandidateLayout({ children }) {
                   <Sparkles className="h-5 w-5 text-white" />
                 </motion.div>
                 <div>
-                  <h1 className="text-xl font-bold text-white">AI Recruitment</h1>
-                  <p className="text-xs text-slate-400">Candidate Portal</p>
+                  <h1 className="text-xl font-bold text-white">Hirevity</h1>
+                  <p className="text-xs text-slate-400">Ai-Powered Candidate Portal</p>
                 </div>
               </div>
             </div>
