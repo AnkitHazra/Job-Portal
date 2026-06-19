@@ -64,22 +64,22 @@ function Footer() {
   };
 
   const productLinks = [
-    { name: "Features", href: "#", icon: Zap },
-    { name: "Pricing", href: "#", icon: Sparkles },
-    { name: "Integrations", href: "#", icon: ArrowUpRight },
+    { name: "Features", href: "#features", icon: Zap },
+    { name: "Pricing", href: "upi://pay?pa=hazraankit668@oksbi&pn=Ankit%20Hazra&cu=INR", icon: Sparkles },
+    { name: "Integrations", href: "https://ankithazra.online/", icon: ArrowUpRight },
   ];
 
   const resourceLinks = [
-    { name: "Blog", href: "#", icon: BookOpen },
-    { name: "Career Guide", href: "#", icon: BriefcaseBusiness },
-    { name: "Documentation", href: "#", icon: MessageCircle },
+    { name: "Blog", href: "https://github.com/AnkitHazra/Job-Portal", icon: BookOpen },
+    { name: "Career Guide", href: "https://www.linkedin.com/in/hazraankit2005/", icon: BriefcaseBusiness },
+    { name: "Documentation", href: "https://github.com/AnkitHazra/Job-Portal", icon: MessageCircle },
   ];
 
   const socialLinks = [
-    { name: "GitHub", href: "#", icon: GitFork },
-    { name: "Twitter", href: "#", icon: CircleFadingPlus },
-    { name: "LinkedIn", href: "#", icon: Cloud },
-    { name: "Email", href: "mailto:contact@airecruitment.com", icon: Mail },
+    { name: "GitHub", href: "https://github.com/AnkitHazra", icon: GitFork },
+    { name: "Twitter", href: "https://x.com/hazraAnkit790", icon: CircleFadingPlus },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/hazraankit2005/", icon: Cloud },
+    { name: "Email", href: "mailto:hazraankit668@gmail.com", icon: Mail },
   ];
 
   return (
@@ -108,7 +108,7 @@ function Footer() {
 
               <div>
                 <h3 className="text-lg font-bold text-white">
-                  AI Recruitment
+                  Hirevity
                 </h3>
                 <p className="text-sm text-slate-400">
                   Smart Hiring Platform
@@ -258,7 +258,7 @@ function Footer() {
 
             <div className="flex items-center gap-6">
               <motion.a
-                href="#"
+                href="https://www.linkedin.com/in/hazraankit2005/"
                 whileHover={{ x: -2 }}
                 className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-white transition-colors"
               >
@@ -266,7 +266,7 @@ function Footer() {
                 Privacy Policy
               </motion.a>
               <motion.a
-                href="#"
+                href="https://www.linkedin.com/in/hazraankit2005/"
                 whileHover={{ x: -2 }}
                 className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-white transition-colors"
               >

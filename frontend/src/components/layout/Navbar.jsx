@@ -119,7 +119,7 @@ function Navbar() {
 
             <div>
               <h1 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
-                AI Recruitment
+                Hirevity
               </h1>
               <p className="text-xs text-slate-400">
                 Smart Hiring Platform
