@@ -5,11 +5,15 @@
   </url>
 
   <url>
-    <loc>https://job.ankithazra.online/jobs</loc>
+    <loc>https://job.ankithazra.online/register</loc>
   </url>
 
   <url>
-    <loc>https://job.ankithazra.online/register</loc>
+    <loc>https://job.ankithazra.online/login</loc>
+  </url>
+
+  <url>
+    <loc>https://job.ankithazra.online/jobs</loc>
   </url>
 
 </urlset>

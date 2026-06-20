@@ -10,6 +10,7 @@ import {
   Briefcase,
   ExternalLink,
 } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 function CompanySection() {
   const companies = [
@@ -339,15 +340,16 @@ function CompanySection() {
           transition={{ delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <motion.button
+          <motion.Link
+          to="/jobs"
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.95 }} 
             className="inline-flex items-center gap-2 rounded-xl border border-slate-700/80 bg-slate-800/50 backdrop-blur-sm px-8 py-4 font-semibold text-slate-300 hover:text-white hover:border-slate-600 transition-all"
           >
-            <Building2 size={20} />
-            View All Companies
+            <Building2 size={20} /> 
+            <Link to="/jobs">View All Companies</Link>
             <ExternalLink size={16} />
-          </motion.button>
+          </motion.Link>
         </motion.div>
       </div>
     </section>
